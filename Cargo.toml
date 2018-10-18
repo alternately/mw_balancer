@@ -1,0 +1,6 @@
+[package]
+name = "mw_balancer"
+version = "0.1.0"
+authors = ["Alternately <apgiuffre@gmail.com>"]
+
+[dependencies]
