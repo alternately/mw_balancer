@@ -39,6 +39,18 @@ impl Hex {
         }
         victor
     }
+
+    fn regions_within_two_turns(&self, robert: &Vec<Region>) -> String {
+        //let mut out: i32 = 0;
+        let mut names: String = String::new();
+        for r in robert{
+            if self.shortest_path(r) <= 4.0{
+          //      out = out + 1;
+                names.push_str(&r.name);
+            }
+        }
+        names 
+    }
 }
 
 fn build_hex(x: f32, y: f32) -> Hex {
@@ -50,6 +62,7 @@ fn build_hex(x: f32, y: f32) -> Hex {
 
 
 pub struct Region{
+    name: String,
     hexes: Vec<Hex>,
 }
 
@@ -102,6 +115,7 @@ fn main() {
 
     // make the bay
     let mut bay = Region {
+        name: String::from("bay"),
         hexes: Vec::new(),
     };
     bay.new_hex(5, 1);
@@ -110,6 +124,7 @@ fn main() {
 
     //make the desert
     let mut desert = Region {
+        name: String::from("desert"),
         hexes: Vec::new(),
     };
     desert.new_hex(0, 1);
@@ -120,6 +135,7 @@ fn main() {
 
     //make the forest
     let mut forest = Region {
+        name: String::from("forest"),
         hexes: Vec::new(),
     };
     forest.new_hex(4,3);
@@ -127,6 +143,7 @@ fn main() {
 
     //make the marsh
     let mut marsh = Region {
+        name: String::from("marsh"),
         hexes: Vec::new(),
     };
     marsh.new_hex(6, 6);
@@ -136,18 +153,21 @@ fn main() {
 
     // make the convent
     let mut convent = Region {
+        name: String::from("convent"),
         hexes: Vec::new(),
     };
     convent.new_hex(2,1);
 
     //make the castle
     let mut castle = Region {
+        name: String::from("castle"),
         hexes: Vec::new(),
     };
     castle.new_hex(3,6);
 
     //make the library
     let mut library = Region {
+        name: String::from("library"),
         hexes: Vec::new(),
     };
     library.new_hex(7,5);
@@ -157,7 +177,7 @@ fn main() {
 
     for h in map{
         let avg = mean(h.region_path_distances(&regions));;
-        println!("{}, {}, {}", h.x_val, h.y_val, avg);
+        println!("{}, {}, {}, {}", h.x_val, h.y_val, avg, h.regions_within_two_turns(&regions));
     }
     println!("Hello world!");
 }
