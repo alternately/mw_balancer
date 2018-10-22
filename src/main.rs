@@ -156,8 +156,8 @@ fn main() {
 
 
     for h in map{
-        let avg = String::new();
-        println!("{}, {}, {}", h.x_val, h.y_val, distance);
+        let avg = mean(h.region_path_distances(&regions));;
+        println!("{}, {}, {}", h.x_val, h.y_val, avg);
     }
     println!("Hello world!");
 }
