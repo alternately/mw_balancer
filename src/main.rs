@@ -5,11 +5,23 @@ pub struct Hex{
 
 impl Hex {
     fn distance(&self, harold: &Hex) -> f32 {
-        if (self.x_val - harold.x_val).abs() > (self.y_val - harold.y_val).abs(){
+        match determine_diagonal(self.x_val, self.y_val, harold.x_val, harold.y_val){
+            Diagonal::UpRight => {
+                match greater_distance(self, harold) {
+                    DistanceType::Xdist => {return (self.x_val - harold.x_val).abs();},
+                    DistanceType::Ydist => {return (self.y_val - harold.y_val).abs();},
+                }
+            },
+            Diagonal::UpLeft => {
+                return (self.x_val - harold.x_val).abs() + (self.y_val - harold.y_val).abs();
+            }
+        }
+
+        /* old implementation        if (self.x_val - harold.x_val).abs() > (self.y_val - harold.y_val).abs(){
             (self.x_val - harold.x_val).abs()
         } else {
             (harold.y_val - self.y_val).abs()
-        }
+        } */          
     }
 
     fn eq(&self, harold: &Hex) -> bool {
@@ -47,6 +59,7 @@ impl Hex {
             if self.shortest_path(r) <= 4.0{
           //      out = out + 1;
                 names.push_str(&r.name);
+                names.push_str(", ");
             }
         }
         names 
@@ -60,6 +73,38 @@ fn build_hex(x: f32, y: f32) -> Hex {
     }
 }
 
+// determines whether the distance between x1 and x2 or the distancce between y1 and y2 is greater.
+fn greater_distance(h1: &Hex, h2: &Hex) -> DistanceType{
+    if (h1.x_val - h2.x_val).abs() > (h1.y_val - h2.y_val).abs() {
+        return DistanceType::Xdist;
+    } else {
+        return DistanceType::Ydist;
+    }
+}
+
+enum DistanceType{
+    Xdist,
+    Ydist,
+}
+
+enum Diagonal{
+    UpLeft,
+    UpRight,
+}
+
+fn determine_diagonal(x1: f32, y1: f32, x2: f32, y2: f32) -> Diagonal {
+    if x1 <= x2 && y1 <= y2 {
+        return Diagonal::UpRight;
+    } else if x1 < x2 && y1 > y2 {
+        return Diagonal::UpLeft;
+    } else if x1 > x2 && y1 < y2 {
+        return Diagonal::UpLeft;
+    } else if x1 >= x2 && y1 >= y2 {
+        return Diagonal::UpRight;
+    } else {
+        panic!("shit's fucked in the diagonalization check, yo");
+    }
+}
 
 pub struct Region{
     name: String,
@@ -99,16 +144,16 @@ fn main() {
     // create a blank map of hexes in the shape of a mys wiz board
     let mut map: Vec<Hex> = Vec::new();
     for i in 0..9{
-        let k: usize;
-        let l: usize;
+        let topbound: usize;
+        let bottombound: usize;
         if i < 5 {
-            k = 5 + i;
-            l = 0;
+            topbound = 5 + i;
+            bottombound = 0;
         } else {
-            k = 8;
-            l = i - 4;
+            topbound = 9;
+            bottombound = i - 4;
         }
-        for j in l..k {
+        for j in bottombound..topbound {
             map.push(build_hex(j as f32, i as f32));
         }
     }
@@ -179,5 +224,4 @@ fn main() {
         let avg = mean(h.region_path_distances(&regions));;
         println!("{}, {}, {}, {}", h.x_val, h.y_val, avg, h.regions_within_two_turns(&regions));
     }
-    println!("Hello world!");
 }
