@@ -129,10 +129,10 @@ fn main() {
     let mut marsh = Region {
         hexes: Vec::new(),
     };
-    marsh.new_hex(4, 6);
-    marsh.new_hex(2, 7);
-    marsh.new_hex(3, 7);
-    marsh.new_hex(3, 8);
+    marsh.new_hex(6, 6);
+    marsh.new_hex(5, 7);
+    marsh.new_hex(6, 7);
+    marsh.new_hex(7, 8);
 
     // make the convent
     let mut convent = Region {
@@ -144,20 +144,20 @@ fn main() {
     let mut castle = Region {
         hexes: Vec::new(),
     };
-    castle.new_hex(1,6);
+    castle.new_hex(3,6);
 
     //make the library
     let mut library = Region {
         hexes: Vec::new(),
     };
-    library.new_hex(6,5);
+    library.new_hex(7,5);
 
     let regions = vec![bay, desert, marsh, forest, convent, castle, library];
 
 
     for h in map{
-        let avg = mean(h.region_path_distances(&regions));
-        println!("{}, {}, {}", h.x_val, h.y_val, avg);
+        let avg = String::new();
+        println!("{}, {}, {}", h.x_val, h.y_val, distance);
     }
     println!("Hello world!");
 }
