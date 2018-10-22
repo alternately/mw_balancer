@@ -104,9 +104,9 @@ fn main() {
     let mut bay = Region {
         hexes: Vec::new(),
     };
-    bay.new_hex(6, 1);
+    bay.new_hex(5, 1);
+    bay.new_hex(5, 2);
     bay.new_hex(6, 2);
-    bay.new_hex(7, 2);
 
     //make the desert
     let mut desert = Region {
