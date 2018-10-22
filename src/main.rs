@@ -87,12 +87,15 @@ fn main() {
     let mut map: Vec<Hex> = Vec::new();
     for i in 0..9{
         let k: usize;
+        let l: usize;
         if i < 5 {
             k = 5 + i;
+            l = 0;
         } else {
-            k = 8 - (i - 5);
+            k = 8;
+            l = i - 4;
         }
-        for j in 0..k {
+        for j in l..k {
             map.push(build_hex(j as f32, i as f32));
         }
     }
