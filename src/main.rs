@@ -166,6 +166,7 @@ fn main() {
     bay.new_hex(5, 1);
     bay.new_hex(5, 2);
     bay.new_hex(6, 2);
+    bay.new_hex(7, 3);
 
     //make the desert
     let mut desert = Region {
@@ -183,8 +184,11 @@ fn main() {
         name: String::from("forest"),
         hexes: Vec::new(),
     };
+    forest.new_hex(3,3);
     forest.new_hex(3,4);
     forest.new_hex(4,5);
+
+    
 
     //make the marsh
     let mut marsh = Region {
@@ -215,7 +219,7 @@ fn main() {
         name: String::from("library"),
         hexes: Vec::new(),
     };
-    library.new_hex(7,5);
+    library.new_hex(8,6);
 
     let regions = vec![bay, desert, marsh, forest, convent, castle, library];
 
@@ -223,7 +227,7 @@ fn main() {
     for h in map{
         let avg = mean(h.region_path_distances(&regions));;
         if h.y_val == 0.0  || h.y_val == 4.0  || h.y_val == 8.0  {
-            if h.x_val == 0.0 || h.x_val == 8.0 || (h.y_val == 0.0 && h.x_val == 4.0) {
+            if h.x_val == 0.0 || h.x_val == 8.0 || (h.y_val == 0.0 && h.x_val == 4.0)  || (h.y_val == 8.0 && h.x_val == 4.0){
                 println!("{}, {}, {}, {}", h.x_val, h.y_val, avg, h.regions_within_two_turns(&regions));
             }
         }
