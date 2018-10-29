@@ -59,6 +59,9 @@ impl Hex {
             if self.shortest_path(r) <= 4.0{
           //      out = out + 1;
                 names.push_str(&r.name);
+                names.push_str(" (");
+                names.push_str((&self.shortest_path(r).to_string()));
+                names.push_str(")");
                 names.push_str(", ");
             }
         }
@@ -187,6 +190,7 @@ fn main() {
     forest.new_hex(3,3);
     forest.new_hex(3,4);
     forest.new_hex(4,5);
+    forest.new_hex(5,5);
 
     
 
@@ -195,7 +199,6 @@ fn main() {
         name: String::from("marsh"),
         hexes: Vec::new(),
     };
-    marsh.new_hex(6, 6);
     marsh.new_hex(5, 7);
     marsh.new_hex(6, 7);
     marsh.new_hex(7, 8);
@@ -205,7 +208,7 @@ fn main() {
         name: String::from("convent"),
         hexes: Vec::new(),
     };
-    convent.new_hex(2,1);
+    convent.new_hex(3,1);
 
     //make the castle
     let mut castle = Region {
@@ -219,7 +222,7 @@ fn main() {
         name: String::from("library"),
         hexes: Vec::new(),
     };
-    library.new_hex(8,6);
+    library.new_hex(7,5);
 
     let regions = vec![bay, desert, marsh, forest, convent, castle, library];
 
