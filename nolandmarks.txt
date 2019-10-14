@@ -1,0 +1,6 @@
+0, 0, 3.75, desert, forest, 
+4, 0, 4, bay, forest, 
+0, 4, 4, desert, forest, 
+8, 4, 4.25, bay, marsh, 
+4, 8, 4.25, marsh, forest, 
+8, 8, 4.25, marsh, forest, 

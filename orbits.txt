@@ -1,0 +1,29 @@
+0, 0, 4.428571, desert, forest, convent, 
+1, 1, 3.5714285, bay, desert, forest, convent, 
+2, 2, 2.857143, bay, desert, marsh, forest, convent, castle, 
+3, 3, 2.5714285, bay, desert, marsh, forest, convent, castle, library,
+
+4, 0, 4.285714, bay, forest, convent, 
+4, 1, 3.4285715, bay, desert, forest, convent, library, 
+4, 2, 2.7142856, bay, desert, marsh, forest, convent, library, 
+4, 3, 2.4285715, bay, desert, marsh, forest, convent, castle, library, 
+
+0, 4, 4.714286, desert, castle, 
+1, 4, 3.857143, desert, marsh, forest, convent, castle, 
+2, 4, 3.142857, desert, marsh, forest, convent, castle, 
+3, 4, 2.857143, bay, desert, marsh, forest, convent, castle, library, 
+
+8, 4, 4.428571, bay, marsh, forest, library, 
+7, 4, 3.5714285, bay, marsh, forest, library, 
+6, 4, 2.857143, bay, marsh, forest, convent, library, 
+5, 4, 2.4285715, bay, desert, marsh, forest, convent, castle, library,
+
+4, 8, 4.857143, marsh, castle,
+4, 7, 3.857143, desert, marsh, forest, castle,
+4, 5, 2.857143, bay, desert, marsh, forest, convent, castle, library, 
+4, 6, 3.142857, desert, marsh, forest, castle, library, 
+
+8, 8, 4.714286, marsh, forest, library, 
+7, 7, 3.857143, marsh, forest, castle, library,
+6, 6, 3, bay, marsh, forest, castle, library,
+5, 5, 2.5714285, bay, desert, marsh, forest, convent, castle, library, 

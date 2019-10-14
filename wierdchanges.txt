@@ -1,0 +1,6 @@
+0, 0, 4.714286, desert (1), forest (3), convent (3), 
+4, 0, 4.571429, bay (1), forest (4), convent (2), 
+0, 4, 4.714286, desert (1), forest (3), castle (3), 
+8, 4, 4.428571, bay (1), forest (4), library (2), 
+4, 8, 4.571429, marsh (2), forest (3), castle (2), 
+8, 8, 4.285714, marsh (1), forest (3), library (2), 
