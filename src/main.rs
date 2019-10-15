@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct Hex{
     x_val: f32,
     y_val: f32,
@@ -76,6 +77,21 @@ fn build_hex(x: f32, y: f32) -> Hex {
     }
 }
 
+//shortest distance from one region to another
+fn region_distance(ronald: Region, reggie: Region) -> f32 {
+    let mut possibles: Vec<f32> = Vec::new();
+    for hex in ronald.hexes {
+        possibles.push(hex.shortest_path(&reggie));
+    }
+    let mut n: f32 = 9.0;
+    for f in possibles {
+        if f < n {
+            n = f;
+        }
+    }
+    n
+}
+
 // determines whether the distance between x1 and x2 or the distancce between y1 and y2 is greater.
 fn greater_distance(h1: &Hex, h2: &Hex) -> DistanceType{
     if (h1.x_val - h2.x_val).abs() > (h1.y_val - h2.y_val).abs() {
@@ -109,7 +125,8 @@ fn determine_diagonal(x1: f32, y1: f32, x2: f32, y2: f32) -> Diagonal {
     }
 }
 
-pub struct Region{
+#[derive(Clone)]
+pub struct Region {
     name: String,
     hexes: Vec<Hex>,
 }
@@ -181,16 +198,23 @@ fn main() {
     desert.new_hex(0, 3);
     desert.new_hex(1, 2);
     desert.new_hex(1, 3);
+//    desert.new_hex(1, 4);
+
+    
 
     //make the forest
     let mut forest = Region {
         name: String::from("forest"),
         hexes: Vec::new(),
     };
+    //new below
     forest.new_hex(3,3);
     forest.new_hex(3,4);
     forest.new_hex(4,5);
     forest.new_hex(5,5);
+    //orig below
+//    forest.new_hex(4,3);
+//    forest.new_hex(5,4);
 
     
 
@@ -201,6 +225,7 @@ fn main() {
     };
     marsh.new_hex(5, 7);
     marsh.new_hex(6, 7);
+//    marsh.new_hex(6, 6);    
     marsh.new_hex(7, 8);
 
     // make the convent
@@ -209,6 +234,7 @@ fn main() {
         hexes: Vec::new(),
     };
     convent.new_hex(3,1);
+//    convent.new_hex(2,1);
 
     //make the castle
     let mut castle = Region {
@@ -224,8 +250,79 @@ fn main() {
     };
     library.new_hex(7,5);
 
-    let regions = vec![bay, desert, marsh, forest, convent, castle, library];
+    let mut vilone = Region {
+        name: String::from("vilone"),
+        hexes: Vec::new(),
+    };
+    vilone.new_hex(0,0);
+    vilone.new_hex(1,1);
+    vilone.new_hex(2,2);
+    vilone.new_hex(3,3);
+    
 
+    
+    let mut viltwo = Region {
+        name: String::from("viltwo"),
+        hexes: Vec::new(),
+    };
+    viltwo.new_hex(0,4);
+    viltwo.new_hex(1,4);
+    viltwo.new_hex(2,4);
+    viltwo.new_hex(3,4);  
+
+    
+    let mut vilthree = Region {
+        name: String::from("vilthree"),
+        hexes: Vec::new(),
+    };
+    vilthree.new_hex(4,8);
+    vilthree.new_hex(4,7);
+    vilthree.new_hex(4,6);
+    vilthree.new_hex(4,5);
+
+    
+    let mut vilfour = Region {
+        name: String::from("vilfour"),
+        hexes: Vec::new(),
+    };
+    vilfour.new_hex(8,8);
+    vilfour.new_hex(7,7);
+    vilfour.new_hex(6,6);
+    vilfour.new_hex(5,5);
+
+    
+    let mut vilfive = Region {
+        name: String::from("vilfive"),
+        hexes: Vec::new(),
+    };
+    vilfive.new_hex(8,4);
+    vilfive.new_hex(7,4);
+    vilfive.new_hex(6,4);
+    vilfive.new_hex(5,4);
+
+    
+    let mut vilsix = Region {
+        name: String::from("vilsix"),
+        hexes: Vec::new(),
+    };
+    vilsix.new_hex(4,0);
+    vilsix.new_hex(4,1);
+    vilsix.new_hex(4,2);
+    vilsix.new_hex(4,3);
+
+    
+    
+    let vils = vec![vilone.clone(), viltwo.clone(), vilthree.clone(), vilfour.clone(), vilfive.clone(), vilsix.clone()];
+    let regions = vec![bay.clone(), desert.clone(), marsh.clone(), forest.clone(), convent.clone(), castle.clone(), library.clone()];
+
+    for v in vils {
+        let mut dists: Vec<f32> = Vec::new();
+        for r in regions.clone() {
+            dists.push(region_distance(v.clone(), r));
+        }
+        println!("name:  {}, avg dist:  {}", v.name, mean(dists));
+        
+    }
 
     for h in map{
         let avg = mean(h.region_path_distances(&regions));
@@ -234,5 +331,5 @@ fn main() {
                 println!("{}, {}, {}, {}", h.x_val, h.y_val, avg, h.regions_within_two_turns(&regions));
             }
         }
-    }
+    } 
 }
